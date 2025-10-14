@@ -1,0 +1,17 @@
+title: "Your Name"
+email: "you@example.com"
+description: "Short professional tagline"
+baseurl: ""     # set to "" for USERNAME.github.io
+url: "https://USERNAME.github.io"  # replace USERNAME or use your custom domain
+remote_theme: "mmistakes/minimal-mistakes"
+plugins:
+  - jekyll-include-cache
+collections:
+  projects:
+    output: true
+defaults:
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: single-project
