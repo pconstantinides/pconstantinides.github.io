@@ -1,9 +1,11 @@
 ---
 title: "Project Example"
-date: 2025-01-01
-tags: [portfolio, demo]
+date: 2024-08-01
+tags: [backend, api]
 github: "https://github.com/USERNAME/project-example"
-description: "One-sentence description."
-thumbnail: /assets/images/project-example.png
+demo: "https://project-example.demo"
+thumbnail: /assets/images/projects/project-example.png
+description: "A resilient API framework for high-throughput services."
 ---
-Longer description and details of the project.
+
+Project Example is a production-grade API framework designed to support high-throughput event ingestion. Implemented in Go and used for real-time analytics.

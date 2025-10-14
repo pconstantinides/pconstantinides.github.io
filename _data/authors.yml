@@ -1,0 +1,15 @@
+yourname:
+  name: "Your Name"
+  avatar: "/assets/images/avatar.jpg"    # add this file
+  title: "Senior Software Engineer"
+  email: "you@example.com"
+  location: "Athens, Greece"
+  website: "https://yourdomain.com"      # optional custom domain
+  bio: "I design and build production-ready web applications and open-source libraries. I focus on scalable architecture, developer experience, and clean code."
+  links:
+    - label: "GitHub"
+      url: "https://github.com/USERNAME"
+    - label: "LinkedIn"
+      url: "https://www.linkedin.com/in/yourprofile"
+    - label: "Twitter"
+      url: "https://twitter.com/your_twitter_handle"

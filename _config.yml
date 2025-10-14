@@ -1,17 +1,76 @@
+# Site identity
 title: "Your Name"
-email: "you@example.com"
-description: "Short professional tagline"
-baseurl: ""     # set to "" for USERNAME.github.io
-url: "https://USERNAME.github.io"  # replace USERNAME or use your custom domain
+description: "Senior Software Engineer — web, backend, open source."
+url: "https://USERNAME.github.io" # change to your domain
+baseurl: ""
+
+# Theme
 remote_theme: "mmistakes/minimal-mistakes"
 plugins:
   - jekyll-include-cache
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Build / Markdown
+markdown: kramdown
+kramdown:
+  input: GFM
+
+# Collections
 collections:
   projects:
     output: true
+    permalink: /projects/:name/
 defaults:
   - scope:
       path: ""
       type: "projects"
     values:
       layout: single-project
+
+# Navigation
+navigation:
+  - title: Home
+    url: /
+  - title: Projects
+    url: /projects/
+  - title: Blog
+    url: /blog/
+  - title: About
+    url: /about/
+  - title: Resume
+    url: /assets/resume.pdf
+
+# Author and social data (see _data/authors.yml)
+author_profile: true
+author: yourname
+
+# Pagination / posts
+paginate: 6
+paginate_path: "/blog/page:num/"
+
+# Assets
+permalink: pretty
+exclude:
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# SEO / Social cards
+twitter: your_twitter_handle
+github: USERNAME
+linkedin: your-linkedin
+
+# Analytics (optional) - add your ID if available
+google_analytics: UA-XXXXXXXXX-X
+
+# Other
+theme_config:
+  header:
+    show_title: true
+
+# Helpful notes for GitHub Pages
+github:
+  is_project_page: false
+
+
