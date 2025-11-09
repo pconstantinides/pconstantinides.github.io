@@ -1,0 +1,253 @@
+<!DOCTYPE HTML>
+<!--
+	Strata by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Notes - Panagiotis Constantinides</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="icon" type="image/jpeg" href="../images/avatar.jpg" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<style>
+			/* Custom modifications for smaller left pane and prettier navigation */
+			#header {
+				width: 28% !important; /* Reduced from 35% to 28% */
+				padding: 6em 3em !important; /* Reduced padding */
+			}
+			
+			#main {
+				margin-left: 28% !important; /* Adjusted to match new header width */
+				width: calc(100% - 28%) !important;
+			}
+			
+			/* Pretty navigation styling */
+			#nav {
+				margin-top: 2.5em;
+				display: flex;
+				justify-content: flex-end;
+			}
+			
+			#nav ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				width: 90%; /* Wider container */
+			}
+			
+			#nav ul li {
+				margin: 0.25em 0;
+				text-align: right;
+			}
+			
+			#nav ul li a {
+				display: inline-block;
+				padding: 0.5em 0.8em;
+				width: 300px; /* adjust navigation button width*/
+				text-align: center;
+				background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+				color: rgba(255, 255, 255, 0.85);
+				text-decoration: none;
+				border-radius: 0.6em;
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+				font-weight: 300;
+				font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+				text-transform: none;
+				letter-spacing: 0.025em;
+				font-size: 0.75em;
+				position: relative;
+				overflow: hidden;
+				backdrop-filter: blur(10px);
+				-webkit-backdrop-filter: blur(10px);
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+				line-height: 1.3;
+				text-align: center;
+			}
+			
+			#nav ul li a::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+				transition: left 0.6s ease;
+			}
+			
+			#nav ul li a:hover::before {
+				left: 100%;
+			}
+			
+			#nav ul li a:hover {
+				background: linear-gradient(135deg, rgba(73, 191, 157, 0.25), rgba(73, 191, 157, 0.15));
+				color: #ffffff;
+				border-color: rgba(73, 191, 157, 0.4);
+				transform: translateX(0.4em) scale(1.02);
+				box-shadow: 0 4px 16px rgba(73, 191, 157, 0.2), 0 8px 24px rgba(0, 0, 0, 0.15);
+			}
+			
+			#nav ul li a:active {
+				transform: translateX(0.2em) scale(0.98);
+				transition: all 0.15s ease;
+			}
+			
+			#nav ul li a.active {
+				background: linear-gradient(135deg, rgba(73, 191, 157, 0.3), rgba(73, 191, 157, 0.2));
+				color: #ffffff;
+				border-color: rgba(73, 191, 157, 0.5);
+				box-shadow: 0 4px 20px rgba(73, 191, 157, 0.3);
+			}
+			
+			/* Larger avatar image */
+			#header .image.avatar {
+				width: 8.5em !important; /* Increased from 10em to 12em for more zoom */
+			}
+			
+			#header .image.avatar img {
+				border-radius: 50%;
+				transition: transform 0.3s ease;
+			}
+			
+			#header .image.avatar:hover img {
+				transform: scale(1.1); /* Increased hover scale for more pronounced effect */
+			}
+			
+			/* Mobile responsive adjustments */
+			@media screen and (max-width: 1280px) {
+				#header {
+					width: 30% !important;
+				}
+				#main {
+					margin-left: 30% !important;
+					width: calc(100% - 30%) !important;
+				}
+			}
+			
+			@media screen and (max-width: 980px) {
+				#header {
+					width: 100% !important;
+					height: auto !important;
+					position: relative !important;
+					text-align: center !important;
+					padding: 4em 2em !important;
+				}
+				#main {
+					margin-left: 0 !important;
+					width: 100% !important;
+				}
+				#nav {
+					justify-content: center;
+				}
+				#nav ul {
+					width: auto;
+					display: flex;
+					flex-wrap: wrap;
+					justify-content: center;
+					gap: 0.5em;
+				}
+				#nav ul li {
+					margin: 0.25em;
+					text-align: center;
+				}
+				#nav ul li a {
+					padding: 0.5em 1em;
+					font-size: 0.75em;
+					width: 140px; /* Maintain fixed width on mobile */
+				}
+			}
+		</style>
+	</head>
+
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<a href="../" class="image avatar"><img src="../images/avatar.jpg" alt="" /></a>
+					<h1><strong>Panagiotis Constantinides</strong><br/>
+					Junior Quantum Scientist</h1>
+					
+					<!-- Navigation -->
+					<nav id="nav">
+						<ul>
+							<li><a href="../index.html#one">About</a></li>
+							<li><a href="../research/index.html">Research</a></li>
+							<li><a href="../seminars/index.html">Seminars</a></li>
+							<li><a href="../notes/index.html" class="active">Notes</a></li>
+							<li><a href="../certifications/index.html">Certifications</a></li>
+							<li><a href="../participations/index.html">Participations</a></li>
+						</ul>
+					</nav>
+				</div>
+			</header>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- Notes -->
+					<section id="notes">
+						<header class="major">
+							<h2>Notes</h2>
+						</header>
+						<p>Here you can find my academic notes, study materials, and resources that might be helpful for students and fellow researchers.</p>
+						<div class="row">
+							<div class="col-4 col-12-medium">
+								<h3>Lecture Notes</h3>
+								<ul>
+									<li><a href="#">Algorithms & Data Structures</a></li>
+									<li><a href="#">Database Systems</a></li>
+									<li><a href="#">Computer Networks</a></li>
+									<li><a href="#">Operating Systems</a></li>
+								</ul>
+							</div>
+							<div class="col-4 col-12-medium">
+								<h3>Research Notes</h3>
+								<ul>
+									<li><a href="#">Machine Learning Theory</a></li>
+									<li><a href="#">Statistical Analysis Methods</a></li>
+									<li><a href="#">Experimental Design</a></li>
+									<li><a href="#">Literature Reviews</a></li>
+								</ul>
+							</div>
+							<div class="col-4 col-12-medium">
+								<h3>Study Resources</h3>
+								<ul>
+									<li><a href="#">Reference Materials</a></li>
+									<li><a href="#">Problem Sets</a></li>
+									<li><a href="#">Code Examples</a></li>
+									<li><a href="#">Useful Links</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+					<div class="inner" style="text-align: center; padding: 2em 0; color: #888;">
+						Based on <a href="http://html5up.net" style="color: #666;">HTML5 UP</a>
+					</div>
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<ul class="icons">
+						<li><a href="https://www.linkedin.com/in/panagiotis-constantinides" target="_blank" rel="noopener noreferrer" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+						<li><a href="https://github.com/pconstantinides" target="_blank" rel="noopener noreferrer" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="mailto:panagiotis.constantinides@hotmail.com" target="_blank" rel="noopener noreferrer" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.poptrox.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>

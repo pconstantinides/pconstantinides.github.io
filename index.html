@@ -26,21 +26,27 @@
 			/* Pretty navigation styling */
 			#nav {
 				margin-top: 2.5em;
+				display: flex;
+				justify-content: flex-end;
 			}
 			
 			#nav ul {
 				list-style: none;
 				padding: 0;
 				margin: 0;
+				width: 90%; /* Wider container */
 			}
 			
 			#nav ul li {
 				margin: 0.25em 0;
+				text-align: right;
 			}
 			
 			#nav ul li a {
-				display: block;
+				display: inline-block;
 				padding: 0.5em 0.8em;
+				width: 300px; /* adjust navigation button width*/
+				text-align: center;
 				background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
 				color: rgba(255, 255, 255, 0.85);
 				text-decoration: none;
@@ -133,7 +139,11 @@
 					margin-left: 0 !important;
 					width: 100% !important;
 				}
+				#nav {
+					justify-content: center;
+				}
 				#nav ul {
+					width: auto;
 					display: flex;
 					flex-wrap: wrap;
 					justify-content: center;
@@ -141,14 +151,18 @@
 				}
 				#nav ul li {
 					margin: 0.25em;
+					text-align: center;
 				}
 				#nav ul li a {
 					padding: 0.5em 1em;
 					font-size: 0.75em;
+					width: 140px; /* Maintain fixed width on mobile */
 				}
 			}
 		</style>
 	</head>
+
+
 	<body class="is-preload">
 
 		<!-- Header -->
@@ -161,12 +175,12 @@
 					<!-- Navigation -->
 					<nav id="nav">
 						<ul>
-							<li><a href="#one">About</a></li>
-							<li><a href="#two">Research</a></li>
-							<li><a href="#three">Seminars</a></li>
-							<li><a href="#four">Notes</a></li>
-							<li><a href="#five">Certifications</a></li>
-							<li><a href="#seven">Contact</a></li>
+							<li><a href="index.html">About</a></li>
+							<li><a href="research/index.html">Research</a></li>
+							<li><a href="seminars/index.html">Seminars</a></li>
+							<li><a href="notes/index.html">Notes</a></li>
+							<li><a href="certifications/index.html">Certifications</a></li>
+							<li><a href="participations/index.html">Participations</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -181,14 +195,16 @@
 							<h2>About me</h2>
 						</header>
 						<p>
-							Hi I'm Panos (aka pconstant)
+							Hi I'm Panos (aka pconstant) and currently I am a senior undergraduate (honours) student at the Department of Electrical and Computer Engineering
+							of the Technical University of Crete.
 						</p>
 						<div id="extraText" style="display: none; margin-top: 1em; padding: 1em; background: rgba(255, 255, 255, 0.1); border-radius: 0.375em;">
-							<p>extra text</p>
+							<p>Some more details</p>
 						</div>
 						<ul class="actions">
 							<li><a href="#" class="button" onclick="toggleExtraText(); return false;">Learn More</a></li>
 						</ul>
+						<p><strong>CV</strong> (updated ...):<a href="cv.pdf" target="_blank">link</a></p>
 					</section>
 
 					<script>
@@ -202,137 +218,9 @@
 						}
 					</script>
 
-				<!-- Two -->
-					<section id="two">
-						<h2>Research</h2>
-						<p>
-							My research focuses on 
-						</p>
-						<!-- <div class="row">
-							<div class="col-6 col-12-medium">
-								<h3>Current Projects</h3>
-								<ul>
-									<li>tba</li>
-								</ul>
-							</div>
-							<div class="col-6 col-12-medium">
-								<h3>Publications</h3>
-								<ul>
-									<li><strong>Paper Title</strong></li>
-								</ul>
-							</div>
-						</div> -->
-					</section>
 
-				<!-- Three -->
-					<section id="three">
-						<h2>Seminars</h2>
-						<p>I regularly participate in and organize seminars on various topics in technology and research. These events provide opportunities for knowledge sharing and academic collaboration.</p>
-						<div class="row">
-							<article class="col-6 col-12-xsmall work-item">
-								<a href="https://github.com/pconstantinides/tuc-ieeesb-qst/blob/main/essence_of_qip/essence_of_qip.pdf" class="image fit thumb" title="Redirect"><img src="images/qc_quickstart.png" alt="" /></a>
-								<h3>The Essence of Quantum Information Processing</h3>
-								<p><strong>Date:</strong> October, 2025</p>
-								<p><strong>Location:</strong> Sch. of ECE, TU Crete</p>
-								<p>A first approch to quantum computing focused on the core phenomena that make it algorithmicly interesting. Organized in collaboration with the local IEEE student branch.</p>
-							</article>
-							<article class="col-6 col-12-xsmall work-item">
-								<div class="image fit"><img src="images/trapped_ion_qpus.png" alt="" /></div>
-								<h3>Trapped Ion Quantum Computing</h3>
-								<p><strong>Date:</strong> July, 2024</p>
-								<p><strong>Location:</strong> Sch. of ECE, TU Crete</p>
-								<p>A review of the quantum dynamics that govern the control of trapped ion systems and make quantum computing possible with such systems. A presentation for partial completion of the "Quantum Technologies" course.</p>
-							</article>
-						</div>
-					</section>
-
-				<!-- Four -->
-					<section id="four">
-						<h2>Notes</h2>
-						<p>Here you can find my academic notes, study materials, and resources that might be helpful for students and fellow researchers.</p>
-						<div class="row">
-							<div class="col-4 col-12-medium">
-								<h3>Lecture Notes</h3>
-								<ul>
-									<li><a href="#">Algorithms & Data Structures</a></li>
-									<li><a href="#">Database Systems</a></li>
-									<li><a href="#">Computer Networks</a></li>
-									<li><a href="#">Operating Systems</a></li>
-								</ul>
-							</div>
-							<div class="col-4 col-12-medium">
-								<h3>Research Notes</h3>
-								<ul>
-									<li><a href="#">Machine Learning Theory</a></li>
-									<li><a href="#">Statistical Analysis Methods</a></li>
-									<li><a href="#">Experimental Design</a></li>
-									<li><a href="#">Literature Reviews</a></li>
-								</ul>
-							</div>
-							<div class="col-4 col-12-medium">
-								<h3>Study Resources</h3>
-								<ul>
-									<li><a href="#">Reference Materials</a></li>
-									<li><a href="#">Problem Sets</a></li>
-									<li><a href="#">Code Examples</a></li>
-									<li><a href="#">Useful Links</a></li>
-								</ul>
-							</div>
-						</div>
-					</section>
-
-				<!-- Five -->
-					<section id="five">
-						<h2>Certifications</h2>
-						<p>Professional certifications and credentials that validate my expertise in quantum science, technology, and related fields.</p>
-						<div class="row">
-							<div class="col-6 col-12-medium">
-								<h3>Quantum Computing Certifications</h3>
-								<ul>
-									<li><strong>IBM Quantum Developer Certification</strong> - IBM (2024)</li>
-									<li><strong>Quantum Computing Fundamentals</strong> - Microsoft Azure (2023)</li>
-									<li><strong>Quantum Algorithm Design</strong> - Qiskit Certification (2023)</li>
-								</ul>
-							</div>
-							<div class="col-6 col-12-medium">
-								<h3>Technical Certifications</h3>
-								<ul>
-									<li><strong>Advanced Python for Scientific Computing</strong> - Python Institute (2024)</li>
-									<li><strong>Machine Learning Specialization</strong> - Stanford Online (2023)</li>
-									<li><strong>Data Science Professional</strong> - DataCamp (2023)</li>
-								</ul>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-12">
-								<h3>Academic Achievements</h3>
-								<ul>
-									<li><strong>Quantum Physics Research Certificate</strong> - MIT OpenCourseWare (2024)</li>
-									<li><strong>Advanced Mathematics for Physics</strong> - University of Edinburgh (2023)</li>
-									<li><strong>Scientific Writing and Communication</strong> - Nature Masterclass (2023)</li>
-								</ul>
-							</div>
-						</div>
-					</section>
-
-				<!-- Seven -->
-					<section id="seven">
-						<h2>Event Participations</h2>
-						<p>Active participation in conferences, workshops, and scientific events that contribute to the advancement of quantum science and technology.</p>
-						<div class="row">
-							<div class="col-6 col-12-medium">
-								<h3>Recent Conferences</h3>
-
-							</div>
-							<div class="col-6 col-12-medium">
-								<h3>Workshops & Training</h3>
-
-							</div>
-						</div>
-					</section>
-
-				<!-- Seven -->
-					<section id="seven">
+				<!-- Contact -->
+					<section id="contact">
 						<h2>Get In Touch</h2>
 						<p>I am always open to discussing research collaborations, academic opportunities, and potential projects in quantum computing and related fields. Feel free to contact me.</p>
 						<div class="row">
@@ -361,9 +249,9 @@
 			<footer id="footer">
 				<div class="inner">
 					<ul class="icons">
-						<li><a href="https://www.linkedin.com/in/panagiotis-constantinides" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-						<li><a href="https://github.com/pconstantinides" class="icon brands fa-github"><span class="label">Github</span></a></li>
-						<li><a href="mailto:panagiotis.constantinides@hotmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+						<li><a href="https://www.linkedin.com/in/panagiotis-constantinides" target="_blank" rel="noopener noreferrer" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+						<li><a href="https://github.com/pconstantinides" target="_blank" rel="noopener noreferrer" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="mailto:panagiotis.constantinides@hotmail.com" target="_blank" rel="noopener noreferrer" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
 					</ul>
 				</div>
 			</footer>
