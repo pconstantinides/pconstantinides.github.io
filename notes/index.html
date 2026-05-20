@@ -11,6 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="icon" type="image/jpeg" href="../images/logo.png" />
 		<link rel="stylesheet" href="../assets/css/main.css" />
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 		<style>
 			/* Custom modifications for smaller left pane and prettier navigation */
 			#header {
@@ -115,6 +116,98 @@
 			#header .image.avatar:hover img {
 				transform: scale(1.1); /* Increased hover scale for more pronounced effect */
 			}
+
+			/* Markdown content styling */
+			#markdown-content {
+				display: none;
+			}
+
+			#markdown-content.active {
+				display: block;
+			}
+
+			#markdown-content h1,
+			#markdown-content h2,
+			#markdown-content h3,
+			#markdown-content h4,
+			#markdown-content h5,
+			#markdown-content h6 {
+				margin-top: 1.5em;
+				margin-bottom: 0.5em;
+				font-weight: 600;
+				line-height: 1.2;
+			}
+
+			#markdown-content h1 {
+				font-size: 2em;
+				border-bottom: 2px solid rgba(73, 191, 157, 0.3);
+				padding-bottom: 0.3em;
+			}
+
+			#markdown-content h2 {
+				font-size: 1.5em;
+			}
+
+			#markdown-content p {
+				margin-bottom: 1em;
+				line-height: 1.6;
+			}
+
+			#markdown-content ul,
+			#markdown-content ol {
+				margin-bottom: 1em;
+				margin-left: 2em;
+			}
+
+			#markdown-content li {
+				margin-bottom: 0.5em;
+			}
+
+			#markdown-content code {
+				background: rgba(0, 0, 0, 0.3);
+				padding: 0.2em 0.4em;
+				border-radius: 3px;
+				font-family: 'Courier New', monospace;
+				font-size: 0.9em;
+			}
+
+			#markdown-content pre {
+				background: rgba(0, 0, 0, 0.5);
+				padding: 1em;
+				border-radius: 5px;
+				overflow-x: auto;
+				margin-bottom: 1em;
+			}
+
+			#markdown-content pre code {
+				background: none;
+				padding: 0;
+				border-radius: 0;
+			}
+
+			#markdown-content blockquote {
+				border-left: 4px solid rgba(73, 191, 157, 0.5);
+				margin: 1em 0;
+				padding-left: 1em;
+				color: rgba(255, 255, 255, 0.7);
+			}
+
+			#markdown-content table {
+				border-collapse: collapse;
+				width: 100%;
+				margin-bottom: 1em;
+			}
+
+			#markdown-content th,
+			#markdown-content td {
+				border: 1px solid rgba(255, 255, 255, 0.2);
+				padding: 0.5em;
+				text-align: left;
+			}
+
+			#markdown-content th {
+				background: rgba(73, 191, 157, 0.2);
+			}
 			
 			/* Mobile responsive adjustments */
 			@media screen and (max-width: 1280px) {
@@ -195,8 +288,8 @@
 						</header>
 						<p>Here you can find my academic notes, study materials, and resources that might be helpful for students and fellow researchers.</p>
 						<div class="row">
-							<div class="col-5 col-12-medium">
-								<h3>Course Notes</h3>
+							<div class="col-20 col-12-medium">
+								<h3>Study Guides</h3>
 								<ul>
 									<li><a href="#">Algorithms & Data Structures</a></li>
 									<li><a href="#">Database Systems</a></li>
@@ -204,10 +297,12 @@
 									<li><a href="#">Operating Systems</a></li>
 								</ul>
 							</div>
-							<div class="col-5 col-12-medium">
-								<h3>Study Guides</h3>
+						</div>
+						<div class="row">
+							<div class="col-20 col-12-medium">
+								<h3>Python Notebooks</h3>
 								<ul>
-									<li><a href="#">Machine Learning Theory</a></li>
+						<li><a href="#" onclick="loadMarkdown('guides/basics.md', 'Quantum Basics'); return false;" title="Quantum Basics">Quantum Basics</a></li>
 									<li><a href="#">Statistical Analysis Methods</a></li>
 									<li><a href="#">Experimental Design</a></li>
 									<li><a href="#">Literature Reviews</a></li>
@@ -216,7 +311,11 @@
 						</div>
 					</section>
 
- 
+					<!-- Markdown Content Display -->
+					<section id="markdown-content">
+						<a href="#" onclick="closeMarkdown(); return false;" style="color: rgba(255, 255, 255, 0.7); font-size: 0.9em; margin-bottom: 1em; display: inline-block;">← Back</a>
+						<div id="markdown-body"></div>
+					</section>
 			</div>
 
 		<!-- Footer -->
@@ -237,6 +336,34 @@
 			<script src="../assets/js/breakpoints.min.js"></script>
 			<script src="../assets/js/util.js"></script>
 			<script src="../assets/js/main.js"></script>
+
+			<script>
+				function loadMarkdown(filePath, title) {
+					fetch(filePath)
+						.then(response => {
+							if (!response.ok) {
+								throw new Error('File not found: ' + filePath);
+							}
+							return response.text();
+						})
+						.then(markdown => {
+							const htmlContent = marked.parse(markdown);
+							document.getElementById('markdown-body').innerHTML = '<h1>' + title + '</h1>' + htmlContent;
+							document.getElementById('notes').style.display = 'none';
+							document.getElementById('markdown-content').classList.add('active');
+							window.scrollTo(0, 0);
+						})
+						.catch(error => {
+							alert('Error loading markdown: ' + error.message);
+						});
+				}
+
+				function closeMarkdown() {
+					document.getElementById('markdown-content').classList.remove('active');
+					document.getElementById('notes').style.display = 'block';
+					window.scrollTo(0, 0);
+				}
+			</script>
 
 	</body>
 </html>
