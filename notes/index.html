@@ -223,7 +223,150 @@
 				margin: 1em 0;
 				overflow-x: auto;
 			}
-			
+
+			/* Sidebar state when markdown is active */
+			body.markdown-active #header {
+				width: 5% !important;
+				padding: 2em 0.5em !important;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: space-between;
+				height: 100vh;
+				position: fixed;
+				left: 0;
+				top: 0;
+				background-size: cover;
+				background-position: center;
+			}
+
+			body.markdown-active #main {
+				margin-left: 5% !important;
+				width: calc(100% - 5%) !important;
+			}
+
+			body.markdown-active .image.avatar {
+				display: none !important;
+			}
+
+			body.markdown-active h1 {
+				display: none;
+			}
+
+			body.markdown-active #nav {
+				margin-top: 0;
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: flex-start;
+				order: 1;
+			}
+
+			body.markdown-active #nav ul {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 0.5em;
+			}
+
+			body.markdown-active #nav ul li {
+				margin: 0;
+				text-align: center;
+			}
+
+			body.markdown-active #nav ul li a {
+				width: auto;
+				padding: 0.4em 0.2em;
+				font-size: 0.55em;
+				writing-mode: vertical-rl;
+				text-orientation: mixed;
+				transform: rotate(180deg);
+				white-space: nowrap;
+				letter-spacing: 0.15em;
+				background: linear-gradient(135deg, rgba(73, 191, 157, 0.4), rgba(73, 191, 157, 0.3));
+				border: 1px solid rgba(73, 191, 157, 0.6);
+				box-shadow: 0 2px 8px rgba(73, 191, 157, 0.2);
+			}
+
+			body.markdown-active #nav ul li a:hover {
+				background: linear-gradient(135deg, rgba(73, 191, 157, 0.6), rgba(73, 191, 157, 0.5));
+				border-color: rgba(73, 191, 157, 0.8);
+				box-shadow: 0 4px 12px rgba(73, 191, 157, 0.4);
+			}
+
+			body.markdown-active #nav ul li:not(:first-child) {
+				display: none;
+			}
+
+			body.markdown-active #nav::before {
+				content: 'pconstant';
+				writing-mode: vertical-rl;
+				text-orientation: mixed;
+				transform: rotate(180deg);
+				color: rgba(255, 255, 255, 0.85);
+				font-weight: 600;
+				font-size: 1.2em;
+				letter-spacing: 0.1em;
+				margin-bottom: 1em;
+				order: 0;
+			}
+
+			body.markdown-active #footer {
+				position: fixed;
+				left: 0;
+				bottom: 0;
+				width: 5%;
+				height: auto;
+				background: transparent;
+				padding: 1.5em 0.3em;
+				border: none;
+			}
+
+			body.markdown-active #footer .inner {
+				padding: 0;
+				margin: 0;
+			}
+
+			body.markdown-active #footer ul {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: flex-end;
+				gap: 1.2em;
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			body.markdown-active #footer ul li {
+				margin: 0;
+				padding: 0;
+			}
+
+			body.markdown-active #footer ul li a {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 2.8em;
+				height: 2.8em;
+				font-size: 1.2em;
+				background: linear-gradient(135deg, rgba(73, 191, 157, 0.3), rgba(73, 191, 157, 0.2));
+				border: 1px solid rgba(73, 191, 157, 0.4);
+				border-radius: 50%;
+				color: rgba(255, 255, 255, 0.85);
+				transition: all 0.3s ease;
+				padding: 0;
+			}
+
+			body.markdown-active #footer ul li a:hover {
+				background: linear-gradient(135deg, rgba(73, 191, 157, 0.5), rgba(73, 191, 157, 0.4));
+				border-color: rgba(73, 191, 157, 0.7);
+				transform: scale(1.15);
+				box-shadow: 0 4px 12px rgba(73, 191, 157, 0.3);
+			}
+
 			/* Mobile responsive adjustments */
 			@media screen and (max-width: 1280px) {
 				#header {
@@ -328,7 +471,6 @@
 
 					<!-- Markdown Content Display -->
 					<section id="markdown-content">
-						<a href="#" onclick="closeMarkdown(); return false;" style="color: rgba(255, 255, 255, 0.7); font-size: 0.9em; margin-bottom: 1em; display: inline-block;">← Back</a>
 						<div id="markdown-body"></div>
 					</section>
 			</div>
@@ -380,9 +522,11 @@
 							// Render LaTeX expressions
 							htmlContent = renderMathExpressions(htmlContent);
 							
-							document.getElementById('markdown-body').innerHTML = '<h1>' + title + '</h1>' + htmlContent;
+							const backButton = '<a href="#" onclick="closeMarkdown(); return false;" style="color: rgba(73, 191, 157, 0.8); font-size: 0.9em; margin-bottom: 2em; display: inline-block; transition: color 0.3s ease;">← Back to Notes</a>';
+							document.getElementById('markdown-body').innerHTML = backButton + '<h1>' + title + '</h1>' + htmlContent;
 							document.getElementById('notes').style.display = 'none';
 							document.getElementById('markdown-content').classList.add('active');
+							document.body.classList.add('markdown-active');
 							window.scrollTo(0, 0);
 						})
 						.catch(error => {
@@ -415,6 +559,7 @@
 				function closeMarkdown() {
 					document.getElementById('markdown-content').classList.remove('active');
 					document.getElementById('notes').style.display = 'block';
+					document.body.classList.remove('markdown-active');
 					window.scrollTo(0, 0);
 				}
 			</script>
