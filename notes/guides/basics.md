@@ -7,3 +7,5 @@ H|\psi\rangle = E |\psi\rangle
 $$
 
 meow
+
+![Quantum magic](../../images/tensornets_background.png)
