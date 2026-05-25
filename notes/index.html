@@ -11,6 +11,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="icon" type="image/jpeg" href="../images/logo.png" />
 		<link rel="stylesheet" href="../assets/css/main.css" />
+		<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script>
 		<style>
 			/* Custom modifications for smaller left pane and prettier navigation */
 			#header {
@@ -115,7 +118,255 @@
 			#header .image.avatar:hover img {
 				transform: scale(1.1); /* Increased hover scale for more pronounced effect */
 			}
-			
+
+			/* Markdown content styling */
+			#markdown-content {
+				display: none;
+			}
+
+			#markdown-content.active {
+				display: block;
+			}
+
+			#markdown-content h1,
+			#markdown-content h2,
+			#markdown-content h3,
+			#markdown-content h4,
+			#markdown-content h5,
+			#markdown-content h6 {
+				margin-top: 1.5em;
+				margin-bottom: 0.5em;
+				font-weight: 600;
+				line-height: 1.2;
+			}
+
+			#markdown-content h1 {
+				font-size: 2em;
+				border-bottom: 2px solid rgba(73, 191, 157, 0.3);
+				padding-bottom: 0.3em;
+			}
+
+			#markdown-content h2 {
+				font-size: 1.5em;
+			}
+
+			#markdown-content p {
+				margin-bottom: 1em;
+				line-height: 1.6;
+			}
+
+			#markdown-content ul,
+			#markdown-content ol {
+				margin-bottom: 1em;
+				margin-left: 2em;
+			}
+
+			#markdown-content li {
+				margin-bottom: 0.5em;
+			}
+
+			#markdown-content code {
+				background: rgba(0, 0, 0, 0.3);
+				padding: 0.2em 0.4em;
+				border-radius: 3px;
+				font-family: 'Courier New', monospace;
+				font-size: 0.9em;
+			}
+
+			#markdown-content pre {
+				background: rgba(0, 0, 0, 0.5);
+				padding: 1em;
+				border-radius: 5px;
+				overflow-x: auto;
+				margin-bottom: 1em;
+			}
+
+			#markdown-content pre code {
+				background: none;
+				padding: 0;
+				border-radius: 0;
+			}
+
+			#markdown-content blockquote {
+				border-left: 4px solid rgba(73, 191, 157, 0.5);
+				margin: 1em 0;
+				padding-left: 1em;
+				color: rgba(255, 255, 255, 0.7);
+			}
+
+			#markdown-content table {
+				border-collapse: collapse;
+				width: 100%;
+				margin-bottom: 1em;
+			}
+
+			#markdown-content th,
+			#markdown-content td {
+				border: 1px solid rgba(255, 255, 255, 0.2);
+				padding: 0.5em;
+				text-align: left;
+			}
+
+			#markdown-content th {
+				background: rgba(73, 191, 157, 0.2);
+			}
+
+			#markdown-content img {
+				max-width: 100%;
+				height: auto;
+				border-radius: 5px;
+				margin: 1em 0;
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+			}
+
+			#markdown-content .katex-display {
+				margin: 1em 0;
+				overflow-x: auto;
+			}
+
+			/* Sidebar state when markdown is active */
+			body.markdown-active #header {
+				width: 5% !important;
+				padding: 2em 0.5em !important;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: space-between;
+				height: 100vh;
+				position: fixed;
+				left: 0;
+				top: 0;
+				background-size: cover;
+				background-position: center;
+			}
+
+			body.markdown-active #main {
+				margin-left: 5% !important;
+				width: calc(100% - 5%) !important;
+			}
+
+			body.markdown-active .image.avatar {
+				display: none !important;
+			}
+
+			body.markdown-active h1 {
+				display: none;
+			}
+
+			body.markdown-active #nav {
+				margin-top: 0;
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: flex-start;
+				order: 1;
+			}
+
+			body.markdown-active #nav ul {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 0.5em;
+			}
+
+			body.markdown-active #nav ul li {
+				margin: 0;
+				text-align: center;
+			}
+
+			body.markdown-active #nav ul li a {
+				width: auto;
+				padding: 0.4em 0.2em;
+				font-size: 0.55em;
+				writing-mode: vertical-rl;
+				text-orientation: mixed;
+				transform: rotate(180deg);
+				white-space: nowrap;
+				letter-spacing: 0.15em;
+				background: linear-gradient(135deg, rgba(73, 191, 157, 0.4), rgba(73, 191, 157, 0.3));
+				border: 1px solid rgba(73, 191, 157, 0.6);
+				box-shadow: 0 2px 8px rgba(73, 191, 157, 0.2);
+			}
+
+			body.markdown-active #nav ul li a:hover {
+				background: linear-gradient(135deg, rgba(73, 191, 157, 0.6), rgba(73, 191, 157, 0.5));
+				border-color: rgba(73, 191, 157, 0.8);
+				box-shadow: 0 4px 12px rgba(73, 191, 157, 0.4);
+			}
+
+			body.markdown-active #nav ul li:not(:first-child) {
+				display: none;
+			}
+
+			body.markdown-active #nav::before {
+				content: 'pconstant';
+				writing-mode: vertical-rl;
+				text-orientation: mixed;
+				transform: rotate(180deg);
+				color: rgba(255, 255, 255, 0.85);
+				font-weight: 600;
+				font-size: 1.2em;
+				letter-spacing: 0.1em;
+				margin-bottom: 1em;
+				order: 0;
+			}
+
+			body.markdown-active #footer {
+				position: fixed;
+				left: 0;
+				bottom: 0;
+				width: 5%;
+				height: auto;
+				background: transparent;
+				padding: 1.5em 0.3em;
+				border: none;
+			}
+
+			body.markdown-active #footer .inner {
+				padding: 0;
+				margin: 0;
+			}
+
+			body.markdown-active #footer ul {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: flex-end;
+				gap: 1.2em;
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			body.markdown-active #footer ul li {
+				margin: 0;
+				padding: 0;
+			}
+
+			body.markdown-active #footer ul li a {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 2.8em;
+				height: 2.8em;
+				font-size: 1.2em;
+				background: linear-gradient(135deg, rgba(73, 191, 157, 0.3), rgba(73, 191, 157, 0.2));
+				border: 1px solid rgba(73, 191, 157, 0.4);
+				border-radius: 50%;
+				color: rgba(255, 255, 255, 0.85);
+				transition: all 0.3s ease;
+				padding: 0;
+			}
+
+			body.markdown-active #footer ul li a:hover {
+				background: linear-gradient(135deg, rgba(73, 191, 157, 0.5), rgba(73, 191, 157, 0.4));
+				border-color: rgba(73, 191, 157, 0.7);
+				transform: scale(1.15);
+				box-shadow: 0 4px 12px rgba(73, 191, 157, 0.3);
+			}
+
 			/* Mobile responsive adjustments */
 			@media screen and (max-width: 1280px) {
 				#header {
@@ -179,7 +430,7 @@
 							<li><a href="../seminars/index.html">Seminars</a></li>
 							<li><a href="../notes/index.html" class="active">Notes</a></li>
 							<li><a href="../qualifications/index.html">Qualifications</a></li>
-								<li><a href="../events/index.html">Events</a></li>
+									<li><a href="../distinctions/index.html">Distinctions</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -195,8 +446,8 @@
 						</header>
 						<p>Here you can find my academic notes, study materials, and resources that might be helpful for students and fellow researchers.</p>
 						<div class="row">
-							<div class="col-5 col-12-medium">
-								<h3>Course Notes</h3>
+							<div class="col-20 col-12-medium">
+								<h3>Study Guides</h3>
 								<ul>
 									<li><a href="#">Algorithms & Data Structures</a></li>
 									<li><a href="#">Database Systems</a></li>
@@ -204,10 +455,12 @@
 									<li><a href="#">Operating Systems</a></li>
 								</ul>
 							</div>
-							<div class="col-5 col-12-medium">
-								<h3>Study Guides</h3>
+						</div>
+						<div class="row">
+							<div class="col-20 col-12-medium">
+								<h3>Python Notebooks</h3>
 								<ul>
-									<li><a href="#">Machine Learning Theory</a></li>
+						<li><a href="#" onclick="loadMarkdown('guides/basics.md', 'Quantum Basics'); return false;" title="Quantum Basics">Quantum Basics</a></li>
 									<li><a href="#">Statistical Analysis Methods</a></li>
 									<li><a href="#">Experimental Design</a></li>
 									<li><a href="#">Literature Reviews</a></li>
@@ -216,7 +469,10 @@
 						</div>
 					</section>
 
- 
+					<!-- Markdown Content Display -->
+					<section id="markdown-content">
+						<div id="markdown-body"></div>
+					</section>
 			</div>
 
 		<!-- Footer -->
@@ -237,6 +493,76 @@
 			<script src="../assets/js/breakpoints.min.js"></script>
 			<script src="../assets/js/util.js"></script>
 			<script src="../assets/js/main.js"></script>
+
+			<script>
+				function loadMarkdown(filePath, title) {
+					fetch(filePath)
+						.then(response => {
+							if (!response.ok) {
+								throw new Error('File not found: ' + filePath);
+							}
+							return response.text();
+						})
+						.then(markdown => {
+							// Get the directory of the markdown file for relative paths
+							const fileDir = filePath.substring(0, filePath.lastIndexOf('/'));
+							
+							// Convert markdown to HTML
+							let htmlContent = marked.parse(markdown);
+							
+							// Fix relative image paths
+							htmlContent = htmlContent.replace(/<img([^>]*?)src="([^"]+)"([^>]*)>/g, function(match, before, src, after) {
+								// If src doesn't start with http or /, make it relative to the markdown file's directory
+								if (!src.startsWith('http') && !src.startsWith('/')) {
+									src = fileDir + '/' + src;
+								}
+								return '<img' + before + 'src="' + src + '"' + after + '>';
+							});
+							
+							// Render LaTeX expressions
+							htmlContent = renderMathExpressions(htmlContent);
+							
+							const backButton = '<a href="#" onclick="closeMarkdown(); return false;" style="color: rgba(73, 191, 157, 0.8); font-size: 0.9em; margin-bottom: 2em; display: inline-block; transition: color 0.3s ease;">← Back to Notes</a>';
+							document.getElementById('markdown-body').innerHTML = backButton + '<h1>' + title + '</h1>' + htmlContent;
+							document.getElementById('notes').style.display = 'none';
+							document.getElementById('markdown-content').classList.add('active');
+							document.body.classList.add('markdown-active');
+							window.scrollTo(0, 0);
+						})
+						.catch(error => {
+							alert('Error loading markdown: ' + error.message);
+						});
+				}
+
+				function renderMathExpressions(html) {
+					// Handle display math ($$...$$)
+					html = html.replace(/\$\$([\s\S]*?)\$\$/g, function(match, math) {
+						try {
+							return katex.renderToString(math, { displayMode: true });
+						} catch (e) {
+							return '<span style="color: red;">Math error: ' + e.message + '</span>';
+						}
+					});
+					
+					// Handle inline math ($...$) - but avoid replacing $$
+					html = html.replace(/(?<!\$)\$([^\$\n]+)\$(?!\$)/g, function(match, math) {
+						try {
+							return katex.renderToString(math, { displayMode: false });
+						} catch (e) {
+							return '<span style="color: red;">Math error: ' + e.message + '</span>';
+						}
+					});
+					
+					return html;
+				}
+
+				function closeMarkdown() {
+					document.getElementById('markdown-content').classList.remove('active');
+					document.getElementById('notes').style.display = 'block';
+					document.body.classList.remove('markdown-active');
+					window.scrollTo(0, 0);
+				}
+			</script>
 
 	</body>
 </html>
